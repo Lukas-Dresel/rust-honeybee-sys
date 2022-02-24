@@ -8,16 +8,16 @@ fn main() {
     // Tell cargo to tell rustc to link the system bzip2
     // shared library.
     println!("cargo:rustc-link-lib=static=honey_analyzer");
-    println!("cargo:rustc-link-search=../build/");
+    println!("cargo:rustc-link-search=./Honeybee/build");
 
     Command::new("make")
-        .args(&["-C", "../build"])
+        .args(&["-C", "./Honeybee/build"])
         .output()
         .expect("could not run make");
 
     // Tell cargo to invalidate the built crate whenever the wrapper changes
     println!("cargo:rerun-if-changed=wrapper.h");
-    println!("cargo:rerun-if-changed=../build/libhoney_analyzer.a");
+    println!("cargo:rerun-if-changed=./Honeybee/build/libhoney_analyzer.a");
 
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
